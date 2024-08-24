@@ -1,0 +1,1 @@
+A basic web application similar to Instagram with some of the features like sharing posts,liking and commenting them,Uploading profile pictures,Following other users and watching their profiles along with getting the post feed on the home page.
