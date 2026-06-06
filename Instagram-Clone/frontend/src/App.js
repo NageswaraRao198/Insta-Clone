@@ -1,46 +1,61 @@
-import logo from "./logo.svg";
-import React, { createContext, useState } from "react";
+import React from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./screens/Home";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import Profie from "./screens/Profie";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Createpost from "./screens/Createpost";
-import { LoginContext } from "./context/LoginContext";
-import Modal from "./components/Modal";
-import UserProfie from "./components/UserProfile";
-import MyFolliwngPost from "./screens/MyFollowingPost";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { AppProvider } from "./context/AppContext";
+import Navbar from "./components/Navbar";
+import BottomNav from "./components/BottomNav";
+import Home from "./screens/HomeNew";
+import Explore from "./screens/Explore";
+import SignUp from "./components/SignUpNew";
+import SignIn from "./components/SignIn";
+import Profile from "./screens/Profile";
+import UserProfile from "./components/UserProfile";
+import CreatePost from "./screens/CreatePostNew";
+import Notifications from "./screens/Notifications";
+import Messages from "./screens/Messages";
+import Stories from "./screens/Stories";
+import EditProfile from "./screens/EditProfile";
+import PostDetail from "./screens/PostDetail";
+
+const GOOGLE_CLIENT_ID = "852972554695-d2h4p1s3mqdn7ojl61ue21c9melgnjc5.apps.googleusercontent.com";
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("jwt");
+  if (!token) return <Navigate to="/signin" />;
+  return children;
+}
 
 function App() {
-  const [userLogin, setUserLogin] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
   return (
-    <BrowserRouter>
-      <div className="App">
-      <GoogleOAuthProvider clientId="852972554695-d2h4p1s3mqdn7ojl61ue21c9melgnjc5.apps.googleusercontent.com">
-        <LoginContext.Provider value={{ setUserLogin, setModalOpen }}>
-          <Navbar login={userLogin} />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
-            <Route path="/signin" element={<SignIn />}></Route>
-            <Route exact path="/profile" element={<Profie />}></Route>
-            <Route path="/createPost" element={<Createpost />}></Route>
-            <Route path="/profile/:userid" element={<UserProfie />}></Route>
-            <Route path="/followingpost" element={<MyFolliwngPost />}></Route>
-          </Routes>
-          <ToastContainer theme="dark" />
-
-          {modalOpen && <Modal setModalOpen={setModalOpen}></Modal>}
-        </LoginContext.Provider>
-        </GoogleOAuthProvider>
-      </div>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <AppProvider>
+        <BrowserRouter>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+              <Route path="/explore" element={<ProtectedRoute><Explore /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path="/profile/:userid" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+              <Route path="/create" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
+              <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+              <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+              <Route path="/messages/:userId" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+              <Route path="/stories" element={<ProtectedRoute><Stories /></ProtectedRoute>} />
+              <Route path="/edit-profile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
+              <Route path="/post/:postId" element={<ProtectedRoute><PostDetail /></ProtectedRoute>} />
+            </Routes>
+            <BottomNav />
+            <ToastContainer theme="dark" position="bottom-right" />
+          </div>
+        </BrowserRouter>
+      </AppProvider>
+    </GoogleOAuthProvider>
   );
 }
 
