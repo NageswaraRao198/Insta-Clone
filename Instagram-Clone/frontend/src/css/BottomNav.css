@@ -1,0 +1,47 @@
+/* Mobile Bottom Navigation */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: var(--nav-bg, #fff);
+  border-top: 1px solid var(--border-color, #dbdbdb);
+  align-items: center;
+  justify-content: space-around;
+  z-index: 1000;
+}
+
+.bottom-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  color: var(--text-secondary, #8e8e8e);
+  transition: color 0.2s;
+}
+
+.bottom-nav-item.active {
+  color: var(--text-primary, #262626);
+}
+
+.bottom-nav-item .material-symbols-outlined {
+  font-size: 26px;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
+
+  .App {
+    padding-bottom: 50px;
+  }
+
+  /* Hide some nav items on mobile since bottom nav handles them */
+  .nav-links li .material-symbols-outlined[data-mobile-hide] {
+    display: none;
+  }
+}

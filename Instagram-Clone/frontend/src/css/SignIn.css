@@ -1,35 +1,101 @@
-.signIn{
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB1lN1hGZAj0MpZ1ZoN7tt7q38JyzTvjmSMQ&usqp=CAU");
-    background-size: cover;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Auth Pages */
+.signIn, .signUp {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.loginForm{
-    background-color: #ffffff4d;
-    padding: 30px;
-    border: 1px solid rgb(129, 121, 121);
-    border-radius: 1px;
-} 
-
-.loginForm2{
-    background-color: #ffffff4d;
-    padding: 20px;
-    margin-top: 5px;
-    border: 1px solid rgb(129, 121, 121);
-    border-radius: 1px;
+.auth-container {
+  width: 100%;
+  max-width: 350px;
 }
 
-#login-btn{
-    background-color: #1773EA;
-    border: none;
-    border-radius: 3px;
-    color: white;
-    font-weight: bold;
-    padding: 5px 10px;
-   
-    cursor: pointer;
-    margin-top: 8px;
+.auth-form {
+  background: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  padding: 40px;
+  text-align: center;
+}
+
+.auth-logo {
+  font-family: 'Lobster', cursive;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.auth-subtitle {
+  color: #8e8e8e;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  background: #fafafa;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth-form input:focus {
+  border-color: #8e8e8e;
+}
+
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #dbdbdb;
+}
+
+.divider span {
+  padding: 0 16px;
+  color: #8e8e8e;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.google-login {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-switch {
+  background: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.auth-switch a {
+  color: #0095f6;
+  font-weight: 600;
 }

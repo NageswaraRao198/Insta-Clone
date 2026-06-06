@@ -1,43 +1,207 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #efefef;
+  --text-primary: #262626;
+  --text-secondary: #8e8e8e;
+  --border-color: #dbdbdb;
+  --hover-bg: #f5f5f5;
+  --nav-bg: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #fafafa;
+  --modal-overlay: rgba(0, 0, 0, 0.65);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --bg-primary: #000000;
+  --bg-secondary: #121212;
+  --bg-tertiary: #262626;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a8a8a8;
+  --border-color: #363636;
+  --hover-bg: #1a1a1a;
+  --nav-bg: #000000;
+  --card-bg: #000000;
+  --input-bg: #262626;
+  --modal-overlay: rgba(0, 0, 0, 0.85);
+}
+
+body.dark-mode .post-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .navbar {
+  background: var(--nav-bg);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .search-input,
+body.dark-mode .comment-form input {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .search-dropdown {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .image-skeleton {
+  background: linear-gradient(90deg, #262626 25%, #363636 50%, #262626 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+body.dark-mode .profile-page,
+body.dark-mode .messages-page,
+body.dark-mode .create-post-page {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .chat-panel,
+body.dark-mode .message-input-area {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .message-input-area input {
+  background: var(--input-bg);
+  color: var(--text-primary);
+}
+
+body.dark-mode .conversation-item:hover,
+body.dark-mode .search-dropdown a:hover {
+  background: var(--hover-bg);
+}
+
+body.dark-mode .post-header-text .post-username,
+body.dark-mode .post-caption strong {
+  color: var(--text-primary);
+}
+
+body.dark-mode .view-comments,
+body.dark-mode .post-time {
+  color: var(--text-secondary);
+}
+
+body.dark-mode .auth-card,
+body.dark-mode .modal-content {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+body.dark-mode .auth-card input {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .App {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  padding-top: 60px;
+}
+
+.loading {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  padding: 40px;
+  color: #8e8e8e;
+}
+
+.btn-primary {
+  background: #0095f6;
   color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+.btn-primary:hover {
+  background: #1877f2;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #efefef;
+  color: #262626;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #dbdbdb;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  min-width: 300px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 12px;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  color: #8e8e8e;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
 }
